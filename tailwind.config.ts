@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,17 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom Cretacia Game colors
+				'jungle-green': '#0A2D1D',
+				'bone-white': '#F5F5E6',
+				'bio-cyan': '#4DEAFF',
+				'amber': '#FFAB00',
+				'dark-amber': '#A06D00',
+			},
+			fontFamily: {
+				'orbitron': ['Orbitron', 'sans-serif'],
+				'exo': ['Exo 2', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +95,37 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-glow': {
+					'0%, 100%': {
+						textShadow: '0 0 16px rgba(77, 234, 255, 0.7)'
+					},
+					'50%': {
+						textShadow: '0 0 25px rgba(77, 234, 255, 0.9)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0) scale(0.8)',
+						opacity: '0.2'
+					},
+					'50%': {
+						transform: 'translateY(-15px) scale(1)',
+						opacity: '0.9'
+					}
+				},
+				'shake': {
+					'0%, 100%': { transform: 'translateX(0)' },
+					'10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+					'20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+				'float': 'float 6s ease-in-out infinite',
+				'shake': 'shake 0.8s cubic-bezier(.36,.07,.19,.97) both',
 			}
 		}
 	},

@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -98,4 +102,23 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.floating-spore {
+  @apply absolute h-2 w-2 rounded-full bg-bio-cyan/70 animate-float;
+  box-shadow: 0 0 10px 2px rgba(77, 234, 255, 0.7);
+}
+
+.title-glow {
+  text-shadow: 0 0 20px rgba(77, 234, 255, 0.8);
+}
+
+.shake {
+  animation: shake 0.8s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
