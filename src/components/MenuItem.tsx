@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 
 interface MenuItemProps {
   label: string;
@@ -30,19 +29,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ label, onClick, delay = 0 }) => {
           textShadow: isHovered ? '0 0 15px rgba(0, 196, 180, 0.7)' : 'none'
         }}
       >
-        <motion.div
-          initial={{ opacity: 0, width: 0, x: -10 }}
-          animate={{ 
-            opacity: isHovered ? 1 : 0, 
-            width: isHovered ? 'auto' : 0,
-            x: isHovered ? 0 : -10
-          }}
-          transition={{ duration: 0.2 }}
-          className="mr-2 flex items-center"
-        >
-          <ArrowRight size={24} className={`text-bio-cyan ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
-        </motion.div>
-        
+        {/* Arrow on hover has been removed as requested */}
         {label}
 
         {/* Underline animation */}

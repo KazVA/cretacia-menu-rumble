@@ -1,14 +1,14 @@
 
 import { useState, useEffect, useRef } from 'react';
 import MenuItem from './MenuItem';
-import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SettingsMenu from './SettingsMenu';
 
 const MainMenu = () => {
   const [spores, setSpores] = useState<{ id: number; left: string; top: string; animationDuration: string; delay: string; size: string }[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [rumbleActive, setRumbleActive] = useState(false);
-
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  
   useEffect(() => {
     // Generate spores for the bioluminescent effect with more variety
     const generateSpores = () => {
@@ -31,30 +31,14 @@ const MainMenu = () => {
     };
 
     generateSpores();
-
-    // Simulate T-Rex rumble every 20 seconds
-    const trexInterval = setInterval(() => {
-      if (containerRef.current) {
-        setRumbleActive(true);
-        
-        // Play T-Rex sound (we'll just simulate this with console log)
-        console.log('T-Rex rumble played');
-        
-        setTimeout(() => {
-          setRumbleActive(false);
-        }, 1000);
-      }
-    }, 20000);
-
-    return () => {
-      clearInterval(trexInterval);
-    };
+    
+    // Removed the T-Rex rumble effect as requested
   }, []);
 
   const menuItems = [
     { label: 'New Game', action: () => console.log('New Game clicked') },
     { label: 'Load Game', action: () => console.log('Load Game clicked') },
-    { label: 'Settings', action: () => console.log('Settings clicked') },
+    { label: 'Settings', action: () => setSettingsOpen(true) }, // Open settings menu
     { label: 'Credits', action: () => console.log('Credits clicked') },
     { label: 'Exit', action: () => console.log('Exit clicked') },
   ];
@@ -62,7 +46,7 @@ const MainMenu = () => {
   return (
     <div 
       ref={containerRef}
-      className={`relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center ${rumbleActive ? 'shake' : ''}`}
+      className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center"
       style={{ 
         backgroundImage: `url('https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&q=80')`,
         backgroundSize: 'cover',
@@ -143,23 +127,15 @@ const MainMenu = () => {
           ))}
         </div>
 
-        {/* Instructions with icon */}
+        {/* Instructions (removed arrow as requested) */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.8 }}
           transition={{ delay: 2.2, duration: 1 }}
           className="fixed bottom-12 left-12 font-exo text-xs text-bone-white/80 flex items-center gap-2 z-20"
         >
-          <span>Press</span>
-          <ArrowRight size={14} className="text-bio-cyan animate-pulse" />
-          <span>to select</span>
+          <span>Select an option to continue</span>
         </motion.div>
-      </div>
-
-      {/* Ambient audio note - would be replaced by actual audio implementation */}
-      <div className="hidden">
-        {/* Jungle ambient sound would play here */}
-        {/* T-Rex rumble sound would play here when rumbleActive is true */}
       </div>
 
       {/* Version info */}
@@ -171,6 +147,9 @@ const MainMenu = () => {
       >
         ALPHA v0.1 | © 2025 Cretacia Studios
       </motion.div>
+
+      {/* Settings Menu */}
+      <SettingsMenu isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </div>
   );
 };
