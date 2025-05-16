@@ -22,8 +22,9 @@ const MenuItem: React.FC<MenuItemProps> = ({ label, onClick, delay = 0 }) => {
         onClick={onClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`flex items-center font-exo font-semibold text-xl md:text-2xl lg:text-3xl transition-all duration-300 ${
-          isHovered ? 'text-bio-cyan' : 'text-bone-white'
+        className={`flex items-center px-4 py-2 font-exo text-lg md:text-xl lg:text-2xl transition-all duration-300 
+          bg-black/20 backdrop-blur-sm rounded-md border border-bio-cyan/20 ${
+          isHovered ? 'text-bio-cyan bg-black/30' : 'text-bone-white'
         }`}
         style={{
           textShadow: isHovered ? '0 0 15px rgba(0, 196, 180, 0.7)' : 'none'
