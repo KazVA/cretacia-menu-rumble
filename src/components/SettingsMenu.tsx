@@ -76,7 +76,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose }) => {
           <div 
             className="absolute inset-0 bg-jungle-green/60 backdrop-blur-md"
             style={{ 
-              backgroundImage: `url('https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&q=80')`,
+              backgroundImage: `url('/lovable-uploads/0e7fe68a-e8aa-4b13-b6ac-c053a1a41429.png')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundBlendMode: 'overlay',
@@ -101,7 +101,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose }) => {
 
           {/* Settings Panel */}
           <motion.div 
-            className="relative z-10 w-[90%] max-w-7xl h-[85vh] bg-jungle-green/90 border border-obsidian rounded-lg overflow-hidden"
+            className="relative z-10 w-[90%] max-w-7xl h-[85vh] bg-jungle-green/90 border border-obsidian rounded-lg overflow-hidden flex flex-col"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 20, opacity: 0 }}
@@ -118,7 +118,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* Settings Content */}
-            <div className="flex h-[calc(100%-80px)]">
+            <div className="flex flex-1 overflow-hidden">
               {/* Tabs Navigation */}
               <Tabs 
                 defaultValue="gameplay" 
@@ -155,7 +155,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Content Area */}
-                <div className="flex-1 p-6 overflow-y-auto settings-content">
+                <div className="flex-1 p-6 pb-20 overflow-y-auto settings-content">
                   {/* Gameplay Tab */}
                   <TabsContent value="gameplay" className="h-full mt-0 space-y-8">
                     <div className="space-y-6">
@@ -379,8 +379,8 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose }) => {
               </Tabs>
             </div>
 
-            {/* Footer with Buttons */}
-            <div className="absolute bottom-0 right-0 p-6 flex gap-4">
+            {/* Footer with Buttons - Moved outside of the content area */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-end gap-4 bg-jungle-green/80 border-t border-obsidian/50">
               <Button 
                 variant="outline" 
                 className="font-exo text-bone-white border-obsidian hover:bg-obsidian/50 hover:text-bio-cyan"

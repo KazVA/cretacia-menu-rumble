@@ -29,7 +29,6 @@ const MenuItem: React.FC<MenuItemProps> = ({ label, onClick, delay = 0 }) => {
           textShadow: isHovered ? '0 0 15px rgba(0, 196, 180, 0.7)' : 'none'
         }}
       >
-        {/* Arrow on hover has been removed as requested */}
         {label}
 
         {/* Underline animation */}
