@@ -5,21 +5,25 @@ import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const MainMenu = () => {
-  const [spores, setSpores] = useState<{ id: number; left: string; top: string; animationDuration: string }[]>([]);
+  const [spores, setSpores] = useState<{ id: number; left: string; top: string; animationDuration: string; delay: string; size: string }[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [rumbleActive, setRumbleActive] = useState(false);
 
   useEffect(() => {
-    // Generate spores for the bioluminescent effect
+    // Generate spores for the bioluminescent effect with more variety
     const generateSpores = () => {
       const newSpores = [];
-      const sporeCount = 30; // Number of spores to generate
+      const sporeCount = 50; // Increased number of spores
       
       for (let i = 0; i < sporeCount; i++) {
+        const size = 1 + Math.random() * 2; // Random size between 1-3px
         newSpores.push({
           id: i,
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 100}%`,
-          animationDuration: `${5 + Math.random() * 10}s`, // Random duration between 5-15s
+          animationDuration: `${5 + Math.random() * 15}s`, // Random duration between 5-20s
+          delay: `${Math.random() * 5}s`, // Random delay for more natural movement
+          size: `${size}px`, // Variable size for more visual interest
         });
       }
       
@@ -31,15 +35,13 @@ const MainMenu = () => {
     // Simulate T-Rex rumble every 20 seconds
     const trexInterval = setInterval(() => {
       if (containerRef.current) {
-        containerRef.current.classList.add('shake');
+        setRumbleActive(true);
         
         // Play T-Rex sound (we'll just simulate this with console log)
         console.log('T-Rex rumble played');
         
         setTimeout(() => {
-          if (containerRef.current) {
-            containerRef.current.classList.remove('shake');
-          }
+          setRumbleActive(false);
         }, 1000);
       }
     }, 20000);
@@ -60,14 +62,17 @@ const MainMenu = () => {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full min-h-screen bg-jungle-green overflow-hidden flex flex-col items-center justify-center"
+      className={`relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center ${rumbleActive ? 'shake' : ''}`}
       style={{ 
         backgroundImage: `url('https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&q=80')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      {/* Bioluminescent spores */}
+      {/* Ambient mist background effect */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-transparent opacity-50"></div>
+      
+      {/* Bioluminescent spores with improved visuals */}
       {spores.map((spore) => (
         <div
           key={spore.id}
@@ -76,15 +81,18 @@ const MainMenu = () => {
             left: spore.left,
             top: spore.top,
             animationDuration: spore.animationDuration,
+            animationDelay: spore.delay,
+            width: spore.size,
+            height: spore.size,
           }}
         />
       ))}
 
-      {/* Dark overlay - reducing opacity to make background image more visible */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-0"></div>
+      {/* Dark gradient overlay for depth and readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/70 z-0"></div>
       
-      {/* T-Rex silhouette - using a CSS shadow instead of an image */}
-      <div className="absolute right-20 bottom-10 hidden md:block">
+      {/* T-Rex silhouette - using SVG for better quality */}
+      <div className="absolute right-20 bottom-10 hidden md:block z-10">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.4 }}
@@ -109,37 +117,49 @@ const MainMenu = () => {
 
       {/* Menu content */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
-        <motion.h1 
+        {/* Title with animated glow effect */}
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="font-orbitron font-bold text-5xl md:text-7xl lg:text-8xl text-bone-white title-glow animate-pulse-glow mb-10"
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="mb-16"
         >
-          <span className="text-bio-cyan">CRE</span>TACIA
-        </motion.h1>
+          <h1 className="font-orbitron font-bold text-5xl md:text-7xl lg:text-8xl text-bone-white title-glow animate-pulse-glow tracking-wider">
+            <span className="text-bio-cyan">CRE</span><span className="relative">TACIA
+              <span className="absolute -inset-1 border-b-2 border-amber opacity-75"></span>
+            </span>
+          </h1>
+        </motion.div>
 
-        {/* Menu buttons - moved to bottom left and made smaller */}
-        <div className="fixed bottom-20 left-10 flex flex-col items-start space-y-4 z-20">
+        {/* Menu buttons */}
+        <div className="fixed bottom-24 left-12 flex flex-col items-start space-y-6 z-20">
           {menuItems.map((item, index) => (
             <MenuItem 
               key={index} 
               label={item.label} 
               onClick={item.action} 
-              delay={index * 0.1 + 0.5}
+              delay={index * 0.15 + 0.5}
             />
           ))}
         </div>
 
+        {/* Instructions with icon */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.8 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="fixed bottom-10 left-10 font-exo text-xs text-bone-white/60 flex items-center gap-2 z-20"
+          transition={{ delay: 2.2, duration: 1 }}
+          className="fixed bottom-12 left-12 font-exo text-xs text-bone-white/80 flex items-center gap-2 z-20"
         >
           <span>Press</span>
-          <ArrowRight size={14} className="text-bio-cyan" />
+          <ArrowRight size={14} className="text-bio-cyan animate-pulse" />
           <span>to select</span>
         </motion.div>
+      </div>
+
+      {/* Ambient audio note - would be replaced by actual audio implementation */}
+      <div className="hidden">
+        {/* Jungle ambient sound would play here */}
+        {/* T-Rex rumble sound would play here when rumbleActive is true */}
       </div>
 
       {/* Version info */}
