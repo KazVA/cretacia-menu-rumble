@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import MenuItem from './MenuItem';
 import { motion } from 'framer-motion';
@@ -48,7 +47,7 @@ const MainMenu = () => {
       ref={containerRef}
       className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center"
       style={{ 
-        backgroundImage: `url('/lovable-uploads/image.png')`,
+        backgroundImage: `url('/lovable-uploads/0e7fe68a-e8aa-4b13-b6ac-c053a1a41429.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
