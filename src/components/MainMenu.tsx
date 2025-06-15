@@ -48,7 +48,7 @@ const MainMenu = () => {
       ref={containerRef}
       className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center"
       style={{ 
-        backgroundImage: `url('/lovable-uploads/0e7fe68a-e8aa-4b13-b6ac-c053a1a41429.png')`,
+        backgroundImage: `url('/lovable-uploads/image.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -116,7 +116,7 @@ const MainMenu = () => {
         </motion.div>
 
         {/* Menu buttons */}
-        <div className="fixed bottom-24 left-12 flex flex-col items-start space-y-6 z-20">
+        <div className="fixed bottom-24 left-12 flex flex-col items-start space-y-3 z-20">
           {menuItems.map((item, index) => (
             <MenuItem 
               key={index} 
